@@ -4,7 +4,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
 class PreProcess:
-    def __init__ (self,location='xs.csv',scale_x='MinMax',scale_y='MinMax',test_size=0.1):
+    def __init__ (self,location='xs.csv',scale_x='MinMax',scale_y='MinMax',test_size=0.15):
         self.data=pd.read_csv(location)
         self.scale_x=scale_x
         self.scale_y=scale_y

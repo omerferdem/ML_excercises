@@ -39,7 +39,7 @@ class MLregressor:
             num_dense_layers = len(self.nn_layers)
             num_nodes = self.nn_layers
             
-            model.add(Dense(num_nodes[0], kernel_initializer='normal', activation='relu', input_dim=Xtrain.shape[1]))
+            model.add(Dense(num_nodes[0], kernel_initializer='normal', activation='relu', input_dim=self.Xtrain.shape[1]))
             #model.add(Dropout(rate=0.5))
             for i in range(1, num_dense_layers):
                 model.add(Dense(num_nodes[i], activation='relu', kernel_initializer='normal'))
@@ -56,4 +56,4 @@ class MLregressor:
             
             history = model.fit(self.Xtrain, self.Ytrain, epochs=self.nn_epochs, batch_size=self.nn_batch_size, validation_split=self.nn_validation_split, callbacks=[checkpoint, model_call])
             return model, history
-        return model
+        return model()
