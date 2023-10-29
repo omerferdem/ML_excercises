@@ -4,7 +4,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
 class PreProcess:
-    def __init__ (self,location='xs.csv',scale_x='MinMax',scale_y='Minmax',test_size=0.1):
+    def __init__ (self,location='xs.csv',scale_x='MinMax',scale_y='MinMax',test_size=0.1):
         self.data=pd.read_csv(location)
         self.scale_x=scale_x
         self.scale_y=scale_y
@@ -28,16 +28,20 @@ class PreProcess:
         else:
             raise ValueError('***Error: The input X scale should be `N`, `MinMax` or `Standard`')
         
+        Y_2d=Y.values.reshape((Y.size, 1)) 
+        """
+        df = pd.DataFrame (Y_2d)
+        filepath = 'my_data.xlsx'
+        df.to_excel(filepath, index=False)
+        """
         if self.scale_y=='N':
-            x_scaled=Y
+            y_scaled=Y_2d
         elif self.scale_y=='MinMax':
             y_one_scaler=preprocessing.MinMaxScaler()
-            y_one_scaler.fit(Y)
-            y_scaled=y_one_scaler.transform(Y)
-        elif self.scale_x=='Standard':
+            y_scaled=y_one_scaler.fit_transform(Y_2d)
+        elif self.scale_y=='Standard':
             y_std_scaler=preprocessing.StandardScaler()
-            y_std_scaler.fit(Y)
-            y_scaled=y_std_scaler.transform(Y)
+            y_scaled=y_std_scaler.fit_transform(Y_2d)
         else:
             raise ValueError('***Error: The input X scale should be `N`, `MinMax` or `Standard`')
 

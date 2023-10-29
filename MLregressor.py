@@ -17,21 +17,21 @@ class MLregressor:
         self.nn_batch_size=nn_batch_size
         self.nn_validation_split=nn_validation_split
 
-    def run_lr(Xtrain,Ytrain):
+    def run_lr(self):
         # Use model.predict(Xtest) to get output.
         def model():
             lr=LinearRegression()
-            return lr.fit(Xtrain,Ytrain)
+            return lr.fit(self.Xtrain,self.Ytrain)
         return model
     
-    def run_rfr(self,Xtrain,Ytrain):
+    def run_rfr(self):
         # Use model.predict(Xtest) to get output.
         def model():
             rfr=RandomForestRegressor(self.rfr_trees)
-            return rfr.fit(Xtrain,Ytrain)
+            return rfr.fit(self.Xtrain,self.Ytrain)
         return model
 
-    def run_nn(self,Xtrain,Ytrain):
+    def run_nn(self):
         # Use model.predict(Xtest) to get output.
         def model():
             #fitting neural network
@@ -54,6 +54,6 @@ class MLregressor:
             #save the best model to use for prediction
             model_call=ModelCheckpoint('mybest_nn.h5', monitor='val_mean_absolute_error', save_best_only=True, verbose=True)
             
-            history = model.fit(Xtrain, Ytrain, epochs=self.nn_epochs, batch_size=self.nn_batch_size, validation_split=self.nn_validation_split, callbacks=[checkpoint, model_call])
+            history = model.fit(self.Xtrain, self.Ytrain, epochs=self.nn_epochs, batch_size=self.nn_batch_size, validation_split=self.nn_validation_split, callbacks=[checkpoint, model_call])
             return model, history
         return model
