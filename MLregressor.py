@@ -22,14 +22,14 @@ class MLregressor:
         def model():
             lr=LinearRegression()
             return lr.fit(self.Xtrain,self.Ytrain)
-        return model
+        return model()
     
     def run_rfr(self):
         # Use model.predict(Xtest) to get output.
         def model():
             rfr=RandomForestRegressor(self.rfr_trees)
             return rfr.fit(self.Xtrain,self.Ytrain)
-        return model
+        return model()
 
     def run_nn(self):
         # Use model.predict(Xtest) to get output.
